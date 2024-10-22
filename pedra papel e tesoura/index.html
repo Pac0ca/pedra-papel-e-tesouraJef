@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./index.css">
+  <title>Batalha POKÉMON</title>
+</head>
+<body>
+  <div class="container">
+    <div class="message">ESCOLHA SEU POKÉMON!</div>
+    <div class="images">
+      <div class="computer">
+        <img src="./geodudeComputer.png" />
+      </div>
+        
+      <div class="player">
+        <img src="./geodudePlayer.png" />
+      </div>
+    </div>
+    <div class="points">
+      OPONENTE <span class="computerPoints">0</span>/
+      <span class="playerPoints">0</span> JOGADOR
+
+    </div>
+    <div class="options">
+      <button type="button">GEODUDE</button>
+      <button type="button">SCIZOR</button>
+      <button type="button">KARTANA</button>
+    </div> 
+  </div>     
+  <script>
+    const computer = document.querySelector(".computer img");
+    const player = document.querySelector(".player img");
+    const computerPoints = document.querySelector(".computerPoints");
+    const playerPoints = document.querySelector(".playerPoints");
+    const options = document.querySelectorAll(".options button");
+
+    options.forEach(option =>{
+      option.addEventListener("click", ()=>{
+
+        setTimeout(()=> {
+          player.src="./"+option.innerHTML + "player.png";
+
+          const choice = ["GEODUDE", "KARTANA", "SCIZOR"];
+          let arrayNO = Math.floor(Math.random() *3 );
+          let computerChoice = choice[arrayNO];
+          computer.src = "./" + computerChoice + "computer.png";
+
+          let cPoints = parseInt(computerPoints.innerHTML);
+          let pPoints = parseInt(playerPoints.innerHTML);
+
+          if(option.innerHTML === "GEODUDE"){
+            if(computerChoice === "KARTANA")
+              computerPoints.innerHTML = cPoints + 1;
+            else if(computerChoice === "SCIZOR")
+              playerPoints.innerHTML = pPoints + 1;
+         }  else if(option.innerHTML === "KARTANA"){
+            if(computerChoice === "SCIZOR")
+              computerPoints.innerHTML = cPoints + 1;
+            else if(computerChoice ==="GEODUDE")
+              playerPoints.innerHTML = pPoints + 1;
+         }  else{
+            if(computerChoice === "GEODUDE")
+              computerPoints.innerHTML = cPoints + 1;
+            else if(computerChoice === "KARTANA")
+              playerPoints.innerHTML = pPoints + 1;
+        }
+
+          
+
+        }, 90);
+
+        
+
+      });
+    });
+
+  </script>
+</body>
+</html>
